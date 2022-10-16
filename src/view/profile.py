@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from src.contorller.profile import create_profile, get_profile, delete_image, modify_profile, search_feed, search_like
+from src.contorller.profile import create_profile, get_profile, delete_image, modify_profile, search_feed, search_like, search
 
 
 class Create_Profile(Resource):
@@ -43,6 +43,12 @@ class Search_Feed(Resource):
 
 class Search_Book(Resource):
     @jwt_required()
-    def get(sel):
+    def get(self):
         account_id = get_jwt_identity()
         return search_like(account_id)
+
+
+class Search(Resource):
+    def get(self, keyword):
+        return search(keyword)
+

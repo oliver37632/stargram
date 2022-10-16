@@ -127,3 +127,24 @@ def search_like(account_id):
                     "url": url
                        } for id, title, created_at, heart_count, comment_count, name, url in feed]
                    }, 200
+
+
+def search(keyword):
+    with session_scope() as session:
+        feed = session.query(FeedTbl.id,
+                             FeedTbl.title,
+                             FeedTbl.create_at,
+                             FeedTbl.heart_count,
+                             FeedTbl.comment_count,
+                             PhotoTbl.url).filter(FeedTbl.title.ilike(f'%{keyword}%'), FeedTbl.id == PhotoTbl.feed_id)
+        return {
+                "posts": [{
+                    "id_pk": binascii.hexlify(id).decode('utf-8')[:8] + '-' + binascii.hexlify(id).decode('utf-8')[8: 12] + '-' + binascii.hexlify(id).decode('utf-8')[12: 16]+ '-' + binascii.hexlify(id).decode('utf-8')[16: 20] + '-' + binascii.hexlify(id).decode('utf-8')[20:],
+                    "title": title,
+                    "created_at": str(created_at),
+                    "heart_count": heart_count,
+                    "comment_count": comment_count,
+                    "url": url
+                       } for id, title, created_at, heart_count, comment_count, url in feed]
+                   }, 200
+

@@ -30,3 +30,6 @@ api_basic.add_resource(Search_Feed, "/profiles/feed")
 
 from src.view.profile import Search_Book
 api_basic.add_resource(Search_Book, "/profiles/favorites")
+
+from src.view.profile import Search
+api_basic.add_resource(Search, "/searchs/<keyword>")
