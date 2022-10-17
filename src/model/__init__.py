@@ -29,4 +29,4 @@ def session_scope():
 
 Base = declarative_base()
 
-Redis = redis
+Redis = redis.StrictRedis(host='localhost', port=6379, db=0)
