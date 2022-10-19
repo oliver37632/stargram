@@ -85,9 +85,12 @@ def refresh_token(token):
     user = Redis.get(token)
 
     if user:
+
         access_token = create_access_token(token)
+        refresh_token = create_refresh_token(token)
         return {
-            "access_token": access_token
+            "access_token": access_token,
+            "refresh_token": refresh_token
         },201
 
 
