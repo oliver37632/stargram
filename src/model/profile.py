@@ -9,7 +9,7 @@ class ProfileTbl(Base):
 
     name = Column(VARCHAR(5), primary_key=True)
     introduce = Column(VARCHAR(30), nullable=False)
-    photo = Column(VARCHAR(300), nullable=False)
+    photo = Column(VARCHAR(300), nullable=True, default="null")
     link = Column(VARCHAR(255))
     id = Column(ForeignKey('user_tbl.id', ondelete='CASCADE'), nullable=False, index=True)
 
