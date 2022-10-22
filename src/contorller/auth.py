@@ -82,16 +82,37 @@ def id_overlap_check(account_id):
 
 
 def refresh_token(token):
-    user = Redis.get(token)
+    with session_scope() as session:
 
-    if user:
+        user = session.query(UserTbl).filter(UserTbl.account_id == token).first()
+        if not user:
+            Redis.delete(token)
+            return {
+                "message": "user is not found"
+            }, 404
+        tokens = Redis.get(token)
+        access_expires_delta = timedelta(minutes=60)
+        refresh_expires_delta = timedelta(weeks=1)
 
-        access_token = create_access_token(token)
-        refresh_token = create_refresh_token(token)
-        return {
-            "access_token": access_token,
-            "refresh_token": refresh_token
-        },201
+        if tokens:
+            Redis.delete(token)
+
+            refresh_token = create_refresh_token(expires_delta=refresh_expires_delta,
+                                                 identity=token
+                                                 )
+
+            access_token = create_access_token(expires_delta=access_expires_delta,
+                                               identity=token
+                                               )
+
+            Redis.setex(name=token,
+                        value=refresh_token,
+                        time=refresh_expires_delta)
+
+            return {
+                "access_token": access_token,
+                "refresh_token": refresh_token
+            },201
 
 
 def email_send(email):

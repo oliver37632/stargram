@@ -12,11 +12,17 @@ import pymysql
 def create_profile(name, introduce, link, image, account_id):
     with session_scope() as session:
         user = session.query(UserTbl).filter(UserTbl.account_id == account_id).first()
-
+        profile = session.query(ProfileTbl).filter(UserTbl.account_id == account_id, ProfileTbl.id == UserTbl.id).first()
         if not user:
             return {
                 "message": "user is not found"
             }, 404
+
+        if profile:
+            return {
+                "message": "Profile already exists"
+            }, 400
+
         new_profile = ProfileTbl(
             id=user.id,
             name=name,
