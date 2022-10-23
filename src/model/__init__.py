@@ -14,8 +14,7 @@ import redis
 def session_scope():
     engine = create_engine(
         url=MY_SQL_URL,
-        encoding="utf-8",
-        echo=True
+        encoding="utf-8"
     )
     Session = scoped_session(sessionmaker(bind=engine, autocommit=False, autoflush=False))
     session = Session()
