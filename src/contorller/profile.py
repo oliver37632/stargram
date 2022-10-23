@@ -69,7 +69,7 @@ def delete_image(account_id):
 
 def modify_profile(name, introduce, link, image, account_id):
     with session_scope() as session:
-        user = session.query(ProfileTbl).filter(ProfileTbl.account_id == account_id).first()
+        user = session.query(ProfileTbl).filter(UserTbl.account_id == account_id, ProfileTbl.id == UserTbl.id).first()
 
         user.image = image
         user.account_id = account_id
