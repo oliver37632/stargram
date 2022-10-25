@@ -10,9 +10,9 @@ def upload(image):
     for f in image:
         name = random.randint(0, 9999)
         f.save("./temp")
-        s3_put_object(s3, AWS_S3_BUCKET_NAME, "./temp", str(name))
+        s3_put_object(s3, AWS_S3_BUCKET_NAME, "./temp", str(name) + ".jpg")
         location = s3.get_bucket_location(Bucket=AWS_S3_BUCKET_NAME)['LocationConstraint']
-        image_url = f'https://{AWS_S3_BUCKET_NAME}.s3.{location}.amazonaws.com/{str(name)}'
+        image_url = f'https://{AWS_S3_BUCKET_NAME}.s3.{location}.amazonaws.com/{str(name) + ".jpg"}'
 
 
         return image_url
