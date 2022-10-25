@@ -3,8 +3,6 @@ from src.model.profile import ProfileTbl
 from src.model.user import UserTbl
 from src.model.feed import FeedTbl
 from src.model.photo import PhotoTbl
-from src.model.heart import HeartTbl
-from src.model.bookmark import BookmarkTbl
 from src.contorller.poto import upload
 import binascii
 import pymysql
