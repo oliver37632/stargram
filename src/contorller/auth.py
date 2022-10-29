@@ -5,12 +5,11 @@ from flask_jwt_extended import create_access_token, create_refresh_token
 from src.model.user import UserTbl
 from src.contorller.email import send_email
 import bcrypt
-from flask import Flask
 
 import random
 
 import uuid
-app = Flask(__name__)
+
 
 def signup(account_id, email, password):
     with session_scope() as session:

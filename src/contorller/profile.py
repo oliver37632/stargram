@@ -7,10 +7,12 @@ from src.contorller.poto import upload
 import binascii
 import pymysql
 
+
 def create_profile(name, introduce, link, image, account_id):
     with session_scope() as session:
+
         user = session.query(UserTbl).filter(UserTbl.account_id == account_id).first()
-        profile = session.query(ProfileTbl).filter(UserTbl.account_id == account_id, ProfileTbl.id == UserTbl.id).first()
+        profile = session.query(ProfileTbl).filter(UserTbl.account_id == account_id, ProfileTbl.user_id == UserTbl.id).first()
         if not user:
             return {
                 "message": "user is not found"
@@ -22,7 +24,7 @@ def create_profile(name, introduce, link, image, account_id):
             }, 400
 
         new_profile = ProfileTbl(
-            id=user.id,
+            user_id=user.id,
             name=name,
             introduce=introduce,
             link=link,
@@ -41,7 +43,7 @@ def create_profile(name, introduce, link, image, account_id):
 def get_profile(account_id):
     with session_scope() as session:
 
-        user = session.query(ProfileTbl).filter(UserTbl.account_id == account_id, UserTbl.id == ProfileTbl.id).first()
+        user = session.query(ProfileTbl).filter(UserTbl.account_id == account_id, UserTbl.id == ProfileTbl.user_id).first()
         if not user:
                 return {
                     "message": "NotFound user"
@@ -67,7 +69,7 @@ def delete_image(account_id):
 
 def modify_profile(name, introduce, link, image, account_id):
     with session_scope() as session:
-        user = session.query(ProfileTbl).filter(UserTbl.account_id == account_id, ProfileTbl.id == UserTbl.id).first()
+        user = session.query(ProfileTbl).filter(UserTbl.account_id == account_id, ProfileTbl.user_id == UserTbl.id).first()
 
         user.photo = upload(image)
         user.account_id = account_id

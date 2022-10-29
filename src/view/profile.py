@@ -11,7 +11,7 @@ class Create_Profile(Resource):
         name = request.form['name']
         introduce = request.form['introduce']
         link = request.form['link']
-        image = request.files.getlist("image")
+        image = request.files["image"]
 
         return create_profile(name, introduce, link, image, account_id)
 
@@ -31,7 +31,7 @@ class Create_Profile(Resource):
         name = request.form['name']
         introduce = request.form['introduce']
         link = request.form['link']
-        image = request.files.getlist("image")
+        image = request.files["image"]
         return modify_profile(name, introduce, link, image, account_id)
 
 
