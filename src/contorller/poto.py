@@ -5,7 +5,7 @@ import uuid
 s3 = s3_connection()
 
 def upload(file, acl="public-read"):
-    name = file.filename + str(uuid.uuid4())
+    name = str(uuid.uuid4()) + file.filename
     try:
         s3.upload_fileobj(
             file,
