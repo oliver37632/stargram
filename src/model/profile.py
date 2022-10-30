@@ -11,7 +11,7 @@ class ProfileTbl(Base):
     introduce = Column(VARCHAR(30), nullable=False)
     photo = Column(VARCHAR(300), nullable=True, default="null")
     link = Column(VARCHAR(255))
-    id = Column(ForeignKey('user_tbl.id', ondelete='CASCADE'), nullable=False, index=True)
+    user_id = Column(ForeignKey('user_tbl.id', ondelete='CASCADE'), nullable=False, index=True)
 
     user_tbl = relationship('UserTbl')
 
