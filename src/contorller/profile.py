@@ -158,7 +158,7 @@ def search(keyword):
 
         cursor = db.cursor()
 
-        sql = f"select ft.id, ft.title from feed_tbl ft left where ft.title like '%{keyword}%';"
+        sql = f"select ft.id, ft.title from feed_tbl ft where ft.title like '%{keyword}%';"
 
         cursor.execute(sql)
         results = cursor.fetchall()
