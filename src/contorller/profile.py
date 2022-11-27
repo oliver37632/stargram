@@ -158,18 +158,14 @@ def search(keyword):
 
         cursor = db.cursor()
 
-        sql = f"select ft.id, ft.title, ft.create_at, ft.heart_count, ft.comment_count, pt.url from feed_tbl ft left join photo_tbl pt on ft.id = pt.feed_id where ft.title like '%{keyword}%';"
+        sql = f"select ft.id, ft.title from feed_tbl ft left where ft.title like '%{keyword}%';"
 
         cursor.execute(sql)
         results = cursor.fetchall()
         return {
                 "feeds": [{
                     "feed_uuid": binascii.hexlify(i[0]).decode('utf-8')[:8] + '-' + binascii.hexlify(i[0]).decode('utf-8')[8: 12] + '-' + binascii.hexlify(i[0]).decode('utf-8')[12: 16] + '-' + binascii.hexlify(i[0]).decode('utf-8')[16: 20] + '-' + binascii.hexlify(i[0]).decode('utf-8')[20:],
-                    "title": i[1],
-                    "created_at": str(i[2]),
-                    "heart_count": i[3],
-                    "comment_count": i[4],
-                    "image": i[5]
+                    "title": i[1]
                        } for i in results]
                    }, 200
 
