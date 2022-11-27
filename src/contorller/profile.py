@@ -84,7 +84,6 @@ def modify_profile(name, introduce, link, image, account_id):
 
 def search_feed(account_ids):
     with session_scope() as session:
-
         db = pymysql.connect(
             host='database-1.cj4qlua9nvsk.ap-northeast-2.rds.amazonaws.com',
             port=3306,
@@ -148,20 +147,29 @@ def search_like(account_id):
 
 def search(keyword):
     with session_scope() as session:
-        feed = session.query(FeedTbl.id,
-                             FeedTbl.title,
-                             FeedTbl.create_at,
-                             FeedTbl.heart_count,
-                             FeedTbl.comment_count,
-                             PhotoTbl.url).filter(FeedTbl.title.ilike(f'%{keyword}%'), FeedTbl.id == PhotoTbl.feed_id)
+        db = pymysql.connect(
+            host='database-2.c6apyqe6674e.ap-northeast-2.rds.amazonaws.com',
+            port=3306,
+            user='admin',
+            passwd='cjb82244',
+            db='stargram',
+            charset='utf8'
+        )
+
+        cursor = db.cursor()
+
+        sql = f"select ft.id, ft.title, ft.create_at, ft.heart_count, ft.comment_count, pt.url from feed_tbl ft left join photo_tbl pt on ft.id = pt.feed_id where ft.title like '%{keyword}%';"
+
+        cursor.execute(sql)
+        results = cursor.fetchall()
         return {
-                "posts": [{
-                    "id_pk": binascii.hexlify(id).decode('utf-8')[:8] + '-' + binascii.hexlify(id).decode('utf-8')[8: 12] + '-' + binascii.hexlify(id).decode('utf-8')[12: 16]+ '-' + binascii.hexlify(id).decode('utf-8')[16: 20] + '-' + binascii.hexlify(id).decode('utf-8')[20:],
-                    "title": title,
-                    "created_at": str(created_at),
-                    "heart_count": heart_count,
-                    "comment_count": comment_count,
-                    "url": url
-                       } for id, title, created_at, heart_count, comment_count, url in feed]
+                "feeds": [{
+                    "feed_uuid": binascii.hexlify(i[0]).decode('utf-8')[:8] + '-' + binascii.hexlify(i[0]).decode('utf-8')[8: 12] + '-' + binascii.hexlify(i[0]).decode('utf-8')[12: 16] + '-' + binascii.hexlify(i[0]).decode('utf-8')[16: 20] + '-' + binascii.hexlify(i[0]).decode('utf-8')[20:],
+                    "title": i[1],
+                    "created_at": str(i[2]),
+                    "heart_count": i[3],
+                    "comment_count": i[4],
+                    "image": i[5]
+                       } for i in results]
                    }, 200
 
