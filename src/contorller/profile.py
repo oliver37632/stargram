@@ -83,12 +83,11 @@ def modify_profile(name, introduce, link, image, account_id):
 
 
 def search_feed(account_ids):
-    with session_scope() as session:
         db = pymysql.connect(
-            host='database-1.cj4qlua9nvsk.ap-northeast-2.rds.amazonaws.com',
+            host='localhost',
             port=3306,
-            user='admin',
-            passwd='oliver37632',
+            user='root',
+            passwd='qwer1234',
             db='stargram',
             charset='utf8'
         )
@@ -116,12 +115,11 @@ def search_feed(account_ids):
 
 
 def search_like(account_id):
-    with session_scope() as session:
         db = pymysql.connect(
-            host='database-1.cj4qlua9nvsk.ap-northeast-2.rds.amazonaws.com',
+            host='localhost',
             port=3306,
-            user='admin',
-            passwd='oliver37632',
+            user='root',
+            passwd='qwer1234',
             db='stargram',
             charset='utf8'
         )
@@ -146,12 +144,11 @@ def search_like(account_id):
 
 
 def search(keyword):
-    with session_scope() as session:
         db = pymysql.connect(
-            host='database-2.c6apyqe6674e.ap-northeast-2.rds.amazonaws.com',
+            host='localhost',
             port=3306,
-            user='admin',
-            passwd='cjb82244',
+            user='root',
+            passwd='qwer1234',
             db='stargram',
             charset='utf8'
         )
