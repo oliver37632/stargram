@@ -106,7 +106,7 @@ def search_feed(account_ids):
             "create_at": str(i[3]),
             "heart_count": i[4],
             "comment_count": i[5],
-            "image": i[6],
+            "image": [i[6]],
             "heart_type": bool(i[7]),
         } for i in results]},200
 
@@ -138,7 +138,7 @@ def search_like(account_id):
             "create_at": str(i[3]),
             "heart_count": i[4],
             "comment_count": i[5],
-            "image": i[6],
+            "image": [i[6]],
             "heart_type": bool(i[7]),
         } for i in results]}, 200
 
