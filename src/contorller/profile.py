@@ -139,8 +139,7 @@ def search_like(account_id):
             "heart_count": i[4],
             "comment_count": i[5],
             "image": [i[6]],
-            "heart_type": bool(i[7]),
-            "i[7]": i[7]
+            "heart_type": bool(i[8])
         } for i in results]}, 200
 
 
