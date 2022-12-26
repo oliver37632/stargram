@@ -99,7 +99,7 @@ def search_feed(account_ids):
         cursor.execute(sql)
         results = cursor.fetchall()
 
-        return {"feeds":[{
+        return {"feed_list":[{
             "name": i[0],
             "feed_uuid": binascii.hexlify(i[1]).decode('utf-8')[:8] + '-' + binascii.hexlify(i[1]).decode('utf-8')[8: 12] + '-' + binascii.hexlify(i[1]).decode('utf-8')[12: 16]+ '-' + binascii.hexlify(i[1]).decode('utf-8')[16: 20] + '-' + binascii.hexlify(i[1]).decode('utf-8')[20:],
             "title": i[2],
@@ -107,7 +107,7 @@ def search_feed(account_ids):
             "heart_count": i[4],
             "comment_count": i[5],
             "image": i[6],
-            "heart_status": bool(i[7]),
+            "heart_type": bool(i[7]),
         } for i in results]},200
 
 
@@ -139,7 +139,7 @@ def search_like(account_id):
             "heart_count": i[4],
             "comment_count": i[5],
             "image": i[6],
-            "heart_status": bool(i[7]),
+            "heart_type": bool(i[7]),
         } for i in results]}, 200
 
 
