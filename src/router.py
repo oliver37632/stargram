@@ -26,7 +26,7 @@ from src.view.profile import Create_Profile
 api_basic.add_resource(Create_Profile, "/profiles")
 
 from src.view.profile import Search_Feed
-api_basic.add_resource(Search_Feed, "/profiles/feed")
+api_basic.add_resource(Search_Feed, "/profiles/feeds")
 
 from src.view.profile import Search_Book
 api_basic.add_resource(Search_Book, "/profiles/favorites")
