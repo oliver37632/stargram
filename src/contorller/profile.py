@@ -140,6 +140,7 @@ def search_like(account_id):
             "comment_count": i[5],
             "image": [i[6]],
             "heart_type": bool(i[7]),
+            "i[7]": i[7]
         } for i in results]}, 200
 
 
