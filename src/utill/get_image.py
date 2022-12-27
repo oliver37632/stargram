@@ -6,4 +6,4 @@ def get_url(feed_id: str):
     with session_scope() as session:
         url = session.query(PhotoTbl.url).filter(PhotoTbl.feed_id == feed_id).first()
         print("url : ",url)
-        return str(url)
+        return str(url(0))
