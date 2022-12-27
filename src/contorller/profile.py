@@ -106,7 +106,7 @@ def search_feed(account_ids):
             "heart_count": i[4],
             "comment_count": i[5],
             "image": [get_url(i[1])],
-            "heart_type": bool(i[7]),
+            "heart_type": bool(i[6]),
         } for i in results]},200
 
 
