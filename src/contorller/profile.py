@@ -125,7 +125,7 @@ def search_like(account_id):
         )
         cursor = db.cursor()
 
-        sql = f"select tpro.name, tf.id, tf.title, tf.create_at, tf.heart_count, tf.comment_count, bt.id, th.id is not NULL as 'heart_exist' from user_tbl tu left join profile_tbl tpro on tu.id = tpro.user_id left join feed_tbl tf on tu.id = tf.user_id left join heart_tbl th on tf.id = th.feed_id left join bookmark_tbl bt on tf.id = bt.feed_id where tu.account_id like '{account_id}' AND bt.id is not null;"
+        sql = f"select tpro.name, tf.id, tf.title, tf.create_at, tf.heart_count, tf.comment_count, th.id is not NULL as 'heart_exist' from user_tbl tu left join profile_tbl tpro on tu.id = tpro.user_id left join feed_tbl tf on tu.id = tf.user_id left join heart_tbl th on tf.id = th.feed_id left join bookmark_tbl bt on tf.id = bt.feed_id where tu.account_id like '{account_id}' AND bt.id is not null;"
 
         cursor.execute(sql)
         results = cursor.fetchall()
