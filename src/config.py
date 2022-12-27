@@ -1,4 +1,4 @@
-MY_SQL_URL="mysql+pymysql://admin:*cjb882244@database-2.c6apyqe6674e.ap-northeast-2.rds.amazonaws.com:3306/stargram?charset=utf8"
+MY_SQL_URL="mysql+pymysql://root:qwer1234@localhost:3306/stargram?charset=utf8"
 authjwt_secret_key= "secret"
 ACCESS_TIMEOUT=1200
 REFRESH_TIMEOUT=1209600
