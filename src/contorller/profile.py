@@ -93,7 +93,7 @@ def search_feed(account_ids):
 
         cursor = db.cursor()
 
-        sql = f"select tpro.name, tf.id, tf.title, tf.create_at, tf.heart_count, tf.comment_count, tp.url, th.id is not NULL as 'heart_exist' from user_tbl tu left join profile_tbl tpro on tu.id = tpro.user_id left join feed_tbl tf on tu.id = tf.user_id left join photo_tbl tp on tf.id = tp.feed_id left join heart_tbl th on tf.id = th.feed_id where tu.account_id like '{account_ids}' order by tf.create_at limit 1;"
+        sql = f"select tpro.name, tf.id, tf.title, tf.create_at, tf.heart_count, tf.comment_count, tp.url, th.id is not NULL as 'heart_exist' from user_tbl tu left join profile_tbl tpro on tu.id = tpro.user_id left join feed_tbl tf on tu.id = tf.user_id left join photo_tbl tp on tf.id = tp.feed_id left join heart_tbl th on tf.id = th.feed_id where tu.account_id like '{account_ids}';"
 
         cursor.execute(sql)
         results = cursor.fetchall()
@@ -137,7 +137,7 @@ def search_like(account_id):
             "create_at": str(i[3]),
             "heart_count": i[4],
             "comment_count": i[5],
-            "image": [i[6]],
+            "image": [get_url(i[1])],
             "heart_type": bool(i[7])
         } for i in results]}, 200
 
